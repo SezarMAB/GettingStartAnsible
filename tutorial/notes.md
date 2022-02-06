@@ -48,3 +48,12 @@
 * list of all hosts: ansible all --list-hosts
 * meta data hosts: ansible all -m gather_facts / ansible all -m gather_facts --limit IP
 
+## Getting started with Ansible 05 - Running elevated ad-hoc Commands
+
+* run command in all remotes: $ ansible all -m apt -a update_cache=true
+* as sudo: $ ansible all -m apt -a update_cache=true --become --ask-become-pass
+* [ansible.apt module Docs](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/apt_module.html)
+* example to install vim-nox: $ ansible all -m apt -a name=vim-nox
+* if exists update to latest version: $ ansible all -m apt -a "name=snapd state=latest"
+* to upgrade all packages: $ ansible all -m apt -a "upgrade=dist" 
+

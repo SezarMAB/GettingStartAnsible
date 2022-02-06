@@ -5,6 +5,7 @@ services:
     build: .
     image: sezar/ansible:v1
     container_name: ansible
+    hostname: ansible
     volumes:
       -  ../playbooks:/hero/playbooks
       - ./entry:/hero/entry
@@ -22,6 +23,7 @@ services:
     build: ./dockerfile-serv
     image: sezar/linux-serv:v1
     container_name: serv04
+    hostname: serv04
     ports:
       - "9501:22"
     volumes:
@@ -36,6 +38,7 @@ services:
     build: ./dockerfile-serv
     image: sezar/linux-serv:v1
     container_name: serv02
+    hostname: serv02
     ports:
       - "9502:22"
     volumes:
@@ -50,6 +53,7 @@ services:
     build: ./dockerfile-serv
     image: sezar/linux-serv:v1
     container_name: serv03
+    hostname: serv03
     ports:
       - "9503:22"
     volumes:

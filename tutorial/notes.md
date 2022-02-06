@@ -4,7 +4,9 @@
 ## Getting started with Ansible 02 - SSH Overview & Setup
 
 1. create an ssh key pair
-    $ ssh-keygen -t ed25519 -C "sezar default"
+    * ssh-keygen -t ed25519 -C "sezar default"
+    * without prompt:
+        * ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/id_ed25519 -C "root default" <<\<y > /dev/null 2>&1
 
 2. copy that key to each server
     * ssh-copy-id -i ~/.ssh/id_ed25519.pub "IP-Address"

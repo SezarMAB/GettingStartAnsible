@@ -1,0 +1,67 @@
+version: "3.8"
+
+services:
+  ansible:
+    build: .
+    container_name: ansible
+    volumes:
+      -  ../playbooks:/hero/playbooks
+      - ./entry:/hero/entry
+      - ../playbooks/ansible.cfg:/etc/ansible/ansible.cfg
+    depends_on:
+      - serv04
+      - serv02
+      - serv03
+    networks:
+      ansible:
+        ipv4_address: 10.5.0.5
+    # entrypoint: /hero/entry/ansible.sh
+  
+  serv04:
+    build: .
+    image: sezar/linux-serv:v1
+    container_name: serv04
+    ports:
+      - "9501:22"
+    volumes:
+      - ./entry:/hero/entry
+    networks:
+      ansible:
+        ipv4_address: 10.5.0.4
+    # entrypoint: /hero/entry/serv.sh
+    
+  
+  serv02:
+    build: .
+    image: sezar/linux-serv:v1
+    container_name: serv02
+    ports:
+      - "9502:22"
+    volumes:
+      - ./entry:/hero/entry
+    networks:
+      ansible:
+        ipv4_address: 10.5.0.2
+    # entrypoint: /hero/entry/serv.sh
+
+  
+  serv03:
+    build: .
+    image: sezar/linux-serv:v1
+    container_name: serv03
+    ports:
+      - "9503:22"
+    volumes:
+      - ./entry:/hero/entry
+    networks:
+      ansible:
+        ipv4_address: 10.5.0.3
+    # entrypoint: /hero/entry/serv.sh
+
+networks:
+  ansible:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1

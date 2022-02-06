@@ -29,3 +29,22 @@
 
 ## Getting started with Ansible 03 - Setting up the Git Repository
 
+* install git and ansible
+
+## Getting started with Ansible 04 - Running ad-hoc Commands
+
+* check connection to servers
+        * ansible all --key-file  ~/.ssh/id_ed25519 -i inventory -m ping
+        inventory file contains server-IPs
+* ansible.cfg contains setting as inventory path, private_key_file 
+
+``` ansible
+        [defaults]
+        inventory = /hero/playbooks/inventory
+        private_key_file = /root/.ssh/id_ed25519
+```
+
+* short command:  ansible all -m ping
+* list of all hosts: ansible all --list-hosts
+* meta data hosts: ansible all -m gather_facts / ansible all -m gather_facts --limit IP
+

@@ -1,6 +1,6 @@
 FROM rastasheep/ubuntu-sshd:18.04
 
-RUN apt update
+RUN apt upgrade
 
 # Labels.
 LABEL maintainer="mahmoud@sezar.sy" \
@@ -13,7 +13,11 @@ LABEL maintainer="mahmoud@sezar.sy" \
     org.label-schema.vcs-url="https://github.com/sezarMbar/docker-ansible" \
     org.label-schema.vendor="Mahmoud Barakat Online" \
     org.label-schema.docker.cmd="docker run --rm -it -v $(pwd):/ansible -v ~/.ssh/id_rsa:/root/id_rsa sezar/ansible:2.11-ubuntu-18.04"
+RUN apt update
 
+RUN apt install software-properties-common -y
+RUN apt-add-repository ppa:ansible/ansible
+RUN apt update
 RUN apt install \
     vim -y\
     curl -y\

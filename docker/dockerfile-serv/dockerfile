@@ -1,4 +1,4 @@
-FROM rastasheep/ubuntu-sshd:20.04
+FROM rastasheep/ubuntu-sshd:18.04
 
 RUN apt update
 
@@ -14,7 +14,10 @@ LABEL maintainer="mahmoud@sezar.sy" \
     org.label-schema.vendor="Mahmoud Barakat Online" \
     org.label-schema.docker.cmd="docker run --rm -it -v $(pwd):/ansible -v ~/.ssh/id_rsa:/root/id_rsa sezar/ansible:2.11-ubuntu-18.04"
 
-RUN apt install -y paython
+RUN apt install -y software-properties-common
+RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt install -y  python3.8 python3-pip 
+RUN apt install -y  python
 
 
 

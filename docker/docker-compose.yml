@@ -3,11 +3,12 @@ version: "3.8"
 services:
   ansible:
     build: .
+    image: sezar/ansible:v1
     container_name: ansible
     volumes:
       -  ../playbooks:/hero/playbooks
       - ./entry:/hero/entry
-      - ../playbooks/ansible.cfg:/etc/ansible/ansible.cfg
+      - ../playbooks/:/etc/ansible/
     depends_on:
       - serv04
       - serv02
@@ -18,7 +19,7 @@ services:
     # entrypoint: /hero/entry/ansible.sh
   
   serv04:
-    build: .
+    build: ./dockerfile-serv
     image: sezar/linux-serv:v1
     container_name: serv04
     ports:
@@ -32,7 +33,7 @@ services:
     
   
   serv02:
-    build: .
+    build: ./dockerfile-serv
     image: sezar/linux-serv:v1
     container_name: serv02
     ports:
@@ -46,7 +47,7 @@ services:
 
   
   serv03:
-    build: .
+    build: ./dockerfile-serv
     image: sezar/linux-serv:v1
     container_name: serv03
     ports:

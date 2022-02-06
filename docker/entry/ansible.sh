@@ -1,9 +1,10 @@
-ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/id_ed25519 -C "root ansible"
+#!/bin/bash
+# ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/id_ed25519 -C "root ansible"
 
-echo 'eval $(ssh-agent) && ssh-add' >>/root/.bashrc
+# echo 'eval $(ssh-agent) && ssh-add' >>/root/.bashrc
 
-source /root/.bashrc
+# source /root/.bashrc
 
-# ssh-copy-id -i ~/.ssh/id_ed25519.pub linux_ansible_01
-# ssh-copy-id -i ~/.ssh/id_ed25519.pub linux_ansible_02
-# ssh-copy-id -i ~/.ssh/id_ed25519.pub linux_ansible_03
+sshpass -p root ssh-copy-id -i /root/.ssh/id_ed25519.pub -o StrictHostKeyChecking=no 10.5.0.2
+sshpass -p root ssh-copy-id -i /root/.ssh/id_ed25519.pub -o StrictHostKeyChecking=no 10.5.0.3
+sshpass -p root ssh-copy-id -i /root/.ssh/id_ed25519.pub -o StrictHostKeyChecking=no 10.5.0.4

@@ -1,0 +1,19 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: update repository index
+      apt:
+        update_cache: yes
+
+    - name: install apache2 package
+      apt:
+        name: apache2
+        state: latest
+
+    - name: add php support for apache
+      apt:
+        name: libapache2-mod-php
+        state: latest
+# If "Could not reliably determine the server's fully qualified domain name"
+# run this comand on remot if  apache2 not started  $ echo 'ServerName localhost   ' >>/etc/apache2/apache2.conf

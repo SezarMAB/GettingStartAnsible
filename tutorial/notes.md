@@ -57,3 +57,9 @@
 * if exists update to latest version: $ ansible all -m apt -a "name=snapd state=latest"
 * to upgrade all packages: $ ansible all -m apt -a "upgrade=dist" 
 
+## Getting started with Ansible 06 - Writing our first Playbook
+
+### write first playbook: install_apache.yml
+
+* Run the playbook: $ ansible-playbook /hero/playbooks/install_apache.yml
+* to remove packages (absent): $ ansible-playbook /hero/playbooks/remove_apache.yml

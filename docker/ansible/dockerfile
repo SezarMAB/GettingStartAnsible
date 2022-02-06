@@ -1,6 +1,4 @@
-FROM rastasheep/ubuntu-sshd:18.04
-
-RUN apt upgrade
+FROM ubuntu:18.04
 
 # Labels.
 LABEL maintainer="mahmoud@sezar.sy" \
@@ -13,18 +11,37 @@ LABEL maintainer="mahmoud@sezar.sy" \
     org.label-schema.vcs-url="https://github.com/sezarMbar/docker-ansible" \
     org.label-schema.vendor="Mahmoud Barakat Online" \
     org.label-schema.docker.cmd="docker run --rm -it -v $(pwd):/ansible -v ~/.ssh/id_rsa:/root/id_rsa sezar/ansible:2.11-ubuntu-18.04"
+
+
+RUN apt upgrade
 RUN apt update
+
+RUN apt-get install -y openssh-server
+RUN mkdir /var/run/sshd
+
+RUN echo 'root:root' |chpasswd
+
+RUN sed -ri 's/^#?PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
+
+RUN mkdir /root/.ssh
 
 RUN apt install software-properties-common -y
 RUN apt-add-repository ppa:ansible/ansible
 RUN apt update
 RUN apt install \
-    vim -y\
+    # vim -y\
     curl -y\
-    ansible -y
+    ansible -y\
+    sshpass -y
 
 
 RUN ssh-keygen -q -t ed25519 -N '' -f ~/.ssh/id_ed25519 -C "root ansible"
-
 RUN echo 'eval $(ssh-agent) && ssh-add' >>/root/.bashrc
 
+
+
+# RUN apt-get clean && \
+#     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/
+
+CMD    ["/usr/sbin/sshd", "-D"]

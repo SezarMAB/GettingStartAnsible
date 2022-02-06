@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   ansible:
-    build: .
+    build: ./ansible
     image: sezar/ansible:v1
     container_name: ansible
     hostname: ansible
@@ -18,14 +18,16 @@ services:
       ansible:
         ipv4_address: 10.5.0.5
     # entrypoint: /hero/entry/ansible.sh
+    # command:  ["/bin/bash","/hero/entry/ansible.sh"]
   
   serv04:
-    build: ./dockerfile-serv
+    build: ./serv
     image: sezar/linux-serv:v1
     container_name: serv04
     hostname: serv04
     ports:
       - "9501:22"
+      - "8084:80"
     volumes:
       - ./entry:/hero/entry
     networks:
@@ -35,12 +37,13 @@ services:
     
   
   serv02:
-    build: ./dockerfile-serv
+    build: ./serv
     image: sezar/linux-serv:v1
     container_name: serv02
     hostname: serv02
     ports:
       - "9502:22"
+      - "8082:80"
     volumes:
       - ./entry:/hero/entry
     networks:
@@ -50,12 +53,13 @@ services:
 
   
   serv03:
-    build: ./dockerfile-serv
+    build: ./serv
     image: sezar/linux-serv:v1
     container_name: serv03
     hostname: serv03
     ports:
       - "9503:22"
+      - "8083:80"
     volumes:
       - ./entry:/hero/entry
     networks:

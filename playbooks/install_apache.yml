@@ -5,15 +5,24 @@
     - name: update repository index
       apt:
         update_cache: yes
+      # when: ansible_distribution in ["Ubuntu","Debian"]
+      when: ansible_distribution == "Ubuntu"
 
     - name: install apache2 package
       apt:
         name: apache2
         state: latest
+      when: ansible_distribution == "Ubuntu"
 
     - name: add php support for apache
       apt:
         name: libapache2-mod-php
         state: latest
+      when: ansible_distribution == "Ubuntu"
 # If "Could not reliably determine the server's fully qualified domain name"
 # run this comand on remot if  apache2 not started  $ echo 'ServerName localhost   ' >>/etc/apache2/apache2.conf
+#
+#    - name: add ServerName to apache2
+#      ansible.builtin.command:
+#        cmd: echo 'ServerName localhost' >>/etc/apache2/apache2.conf
+

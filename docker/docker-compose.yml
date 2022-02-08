@@ -67,6 +67,20 @@ services:
         ipv4_address: 10.5.0.3
     # entrypoint: /hero/entry/serv.sh
 
+  # centos06:
+  #   # build: ./centos
+  #   image:  sickp/centos-sshd
+  #   container_name: centos06
+  #   hostname: centos06
+  #   ports:
+  #     - "9506:22"
+  #     - "8086:80"
+  #   volumes:
+  #     - ./entry:/hero/entry
+  #   networks:
+  #     ansible:
+  #       ipv4_address: 10.5.0.6
+
 networks:
   ansible:
     driver: bridge

@@ -63,3 +63,14 @@
 
 * Run the playbook: $ ansible-playbook /hero/playbooks/install_apache.yml
 * to remove packages (absent): $ ansible-playbook /hero/playbooks/remove_apache.yml
+
+## Getting started with Ansible 07 - The 'when' Conditional
+
+``` ansible
+    - name: install apache2 package
+      apt:
+        name: apache2
+        state: latest
+        # Conditional
+      when: ansible_distribution == "Ubuntu"
+```

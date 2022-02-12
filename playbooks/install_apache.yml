@@ -2,13 +2,23 @@
 - hosts: all
   become: true
   tasks:
-    - name: install apache package and php pachages
-      package:
+    - name: install apache2 package and php pachages
+      apt:
         name:
-          - "{{ apache_package }}"
-          - "{{ php_package }}"
+          - apache2
+          - libapache2-mod-php
         state: latest
         update_cache: yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: install php package and php packages for CentOS
+      dnf:
+        name:
+          - httpd
+          - php
+        state: latest
+        update_cache: yes
+      when: ansible_distribution == "CentOS"
 # If "Could not reliably determine the server's fully qualified domain name"
 # run this comand on remot if  apache2 not started  $ echo 'ServerName localhost   ' >>/etc/apache2/apache2.conf
 #

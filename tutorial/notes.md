@@ -77,3 +77,7 @@
 ## Getting Started with Ansible 08 - Improving your Playbook
 
 ./playbooks/install_apache.yml/inventory
+
+## Getting started with Ansible 09 - Targeting Specific Nodes
+
+   ./playbooks/site.yml/inventory
